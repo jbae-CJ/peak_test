@@ -42,8 +42,8 @@ def write_file_to_s3(bucket, filepath, filename):
     s3.meta.client.upload_file(filename, bucket, key)
 
 
-bucket = #ENTER BUCKET HERE
-filepath = #ENTER FILEPATH HERE
+bucket = 'prod-cjaicenter-datalake-f56'
+filepath = 'cjaicenter/datascience'
 filename = 'houseprices_predictions.csv'
 
 ## Query to select data from Redshift
@@ -113,7 +113,8 @@ CSV DELIMITER ','
 IGNOREHEADER 1""".format(bucket, filepath, filename)
 
 
-sql_engine.execute(text(create_query).execution_options(autocommit=True))
+#sql_engine.execute(text(create_query).execution_options(autocommit=True))
+sql_engine.execute(text(create_tabele_query).execution_options(autocommit=True))
 
 sql_engine.execute(text(delete_query).execution_options(autocommit=True))
 
